@@ -6,7 +6,7 @@ public class Card : MonoBehaviour
     
     public string cardName;
     public string description;
-    public Sprite cardImage; // För 2D
-    // Lägg till fler egenskaper som behövs för din spellogik
+    public Sprite cardImage; // For 2D
+    // Add more functions which is needed for game logic
 
 }
