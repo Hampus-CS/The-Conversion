@@ -9,7 +9,8 @@ public class MapManager : MonoBehaviour
     public int height = 9; // Height of the map
 
     [Header("Hexes")]
-    public GameObject hexPrefab; // Assign Hex prefab in the Inspector
+    public GameObject[] hexPrefabs; // Assign different Hex prefabs in the Inspector
+    public int[] tileCounts; // Number of each tile type to use
 
     void Start()
     {
@@ -18,27 +19,54 @@ public class MapManager : MonoBehaviour
 
     void GenerateMap()
     {
+        List<GameObject> tilesToPlace = new List<GameObject>();
+
+        // Validate total count
+        int totalTiles = 0;
+        for (int i = 0; i < tileCounts.Length; i++)
+        {
+            totalTiles += tileCounts[i];
+            for (int j = 0; j < tileCounts[i]; j++)
+            {
+                tilesToPlace.Add(hexPrefabs[i]);
+            }
+        }
+
+        if (totalTiles != width * height)
+        {
+            Debug.LogError("Total tiles count does not match map size!");
+            return;
+        }
+
+        // Shuffle the list to randomize tile placement
+        for (int i = 0; i < tilesToPlace.Count; i++)
+        {
+            GameObject temp = tilesToPlace[i];
+            int randomIndex = Random.Range(i, tilesToPlace.Count);
+            tilesToPlace[i] = tilesToPlace[randomIndex];
+            tilesToPlace[randomIndex] = temp;
+        }
+
+        int tileIndex = 0;
         for (int y = 0; y < height; y++)
         {
-            // Determine the number of hexes in this row
             int rowWidth = (y % 2 == 0) ? width : width - 1;
 
             for (int x = 0; x < rowWidth; x++)
             {
-                // Calculate hex position with staggered rows
                 Vector2 hexPosition = CalculateHexPosition(x, y);
-                Instantiate(hexPrefab, hexPosition, Quaternion.identity, this.transform);
+                Instantiate(tilesToPlace[tileIndex], hexPosition, Quaternion.identity, this.transform);
+                tileIndex++;
             }
         }
     }
 
     Vector2 CalculateHexPosition(int x, int y)
     {
-        float hexHeight = 2.0f; // Assuming each hex has a height of 2 units; adjust as needed
-        float hexWidth = Mathf.Sqrt(3) * hexHeight / 2; // Calculate hex width based on height
+        float hexHeight = 2.0f;
+        float hexWidth = Mathf.Sqrt(3) * hexHeight / 2;
         float verticalSpacing = 0.75f * hexHeight;
         float horizontalSpacing = hexWidth;
-        // Offset every other row by half the width of a hex
         float offsetX = (y % 2 == 0) ? 0 : hexWidth / 2;
         float posX = x * horizontalSpacing + offsetX;
         float posY = y * verticalSpacing;
