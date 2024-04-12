@@ -5,13 +5,41 @@ public class Card : MonoBehaviour
 {
     public string cardName;
     public string description;
-    public Sprite cardImage; // For 2D
-    public CardType cardType; // Enum to represent card type
+    public Sprite cardImage;  // For displaying the card in UI
+    public CardType cardType;  // This will dictate the card's effect
+    public int troopCount;  // Number of troops that can be moved
 
-    // Define what the card does. Could be more sophisticated based on your game design
+    // Method to activate the card's effect
     public void ActivateEffect()
     {
-        // Implement effect logic here, e.g., moving troops, drawing more cards, etc.
+        switch (cardType)
+        {
+            case CardType.MoveLeftFlank:
+                // Logic to move troops on the left flank
+                MoveTroops("left", troopCount);
+                break;
+            case CardType.MoveCenter:
+                // Logic to move troops in the center
+                MoveTroops("center", troopCount);
+                break;
+            case CardType.MoveRightFlank:
+                // Logic to move troops on the right flank
+                MoveTroops("right", troopCount);
+                break;
+            case CardType.MoveRightLeftFlank:
+                // Logic to move troops in the right/left flank
+                MoveTroops("right-left", troopCount);
+                break;
+            default:
+                Debug.Log("Unknown card type");
+                break;
+        }
+    }
+
+    void MoveTroops(string flank, int count)
+    {
+        Debug.Log($"Moving {count} troops to the {flank} flank.");
+        // Add the actual troop movement logic here
     }
 }
 
@@ -20,5 +48,5 @@ public enum CardType
     MoveLeftFlank,
     MoveCenter,
     MoveRightFlank,
-    // Add more as needed
+    MoveRightLeftFlank,
 }
