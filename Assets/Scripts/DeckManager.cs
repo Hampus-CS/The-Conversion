@@ -4,7 +4,8 @@ using UnityEngine;
 public class DeckManager : MonoBehaviour
 {
     [SerializeField] private List<Card> deck = new List<Card>(); // All cards in the deck
-    [SerializeField] private List<Card> hand = new List<Card>(); // Cards currently in hand
+    private List<Card> hand = new List<Card>(); // Cards currently in hand
+    [SerializeField] private List<Transform> cardPositions = new List<Transform>(); // POS of cards in deck 
 
     void Start()
     {
@@ -33,15 +34,23 @@ public class DeckManager : MonoBehaviour
 
     public void DrawCard()
     {
-        if (deck.Count > 0)
+        if (deck.Count > 0 && hand.Count < cardPositions.Count)
         {
+            if (deck.Count > 0 && hand.Count < cardPositions.Count)
+            {
             Card card = deck[0];
             hand.Add(card);
             deck.RemoveAt(0);
+            card.transform.position = cardPositions[hand.Count - 1].position;
+            }
+            else
+            {
+                Debug.LogError("Card or position is null.");
+            }
         }
         else
         {
-            Debug.Log("No more cards in the deck.");
+            Debug.LogError("No more cards in the deck or hand is full.");
         }
     }
 
@@ -54,4 +63,9 @@ public class DeckManager : MonoBehaviour
             DrawCard(); // Draw a new card after playing one
         }
     }
+    void OnDisable()
+    {  
+        hand.Clear();
+    }
+
 }

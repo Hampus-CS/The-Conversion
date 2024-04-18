@@ -5,7 +5,7 @@ using UnityEngine;
 public class MapManager : MonoBehaviour
 {
     [Header("Map Size")]
-    public int width = 13; // Maximum width
+    public int width = 13; // Maximum width of the map
     public int height = 9; // Height of the map
 
     [Header("Hexes")]
