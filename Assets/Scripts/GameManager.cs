@@ -2,29 +2,32 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public MapManager mapManager; // Reference to the MapManager to access map-related functions
+    public static GameManager Instance { get; private set; }
+    public MapManager mapManager; // Reference to the MapManager
 
-    void Start()
+    private void Awake()
     {
-        // Initialization code here (if needed)
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
     }
 
-    // Example of checking if a unit can move based on a card played
+    // Method to check if a unit can move
     public bool CanMoveUnit(Vector2 unitPosition, Card card)
     {
         MapManager.MapSection unitSection = mapManager.GetMapSection(unitPosition);
-        switch (card.movementFlank)
+        return card.movementFlank switch
         {
-            case Card.Flank.LeftFlank:
-                return unitSection == MapManager.MapSection.LeftFlank;
-            case Card.Flank.Center:
-                return unitSection == MapManager.MapSection.Center;
-            case Card.Flank.RightFlank:
-                return unitSection == MapManager.MapSection.RightFlank;
-            case Card.Flank.LeftRightFlank:
-                return unitSection == MapManager.MapSection.LeftFlank || unitSection == MapManager.MapSection.RightFlank;
-            default:
-                return false;
-        }
+            Card.Flank.LeftFlank => unitSection == MapManager.MapSection.LeftFlank,
+            Card.Flank.Center => unitSection == MapManager.MapSection.Center,
+            Card.Flank.RightFlank => unitSection == MapManager.MapSection.RightFlank,
+            Card.Flank.LeftRightFlank => unitSection == MapManager.MapSection.LeftFlank || unitSection == MapManager.MapSection.RightFlank,
+            _ => false
+        };
     }
 }
