@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,6 +11,8 @@ public class MapManager : MonoBehaviour
     public GameObject[] hexPrefabs; // Assign different Hex prefabs in the Inspector
     public int[] tileCounts; // Number of each tile type to use
 
+    public enum MapSection { LeftFlank, Center, RightFlank }
+
     void Start()
     {
         GenerateMap();
@@ -20,8 +21,6 @@ public class MapManager : MonoBehaviour
     void GenerateMap()
     {
         List<GameObject> tilesToPlace = new List<GameObject>();
-
-        // Validate total count
         int totalTiles = 0;
         for (int i = 0; i < tileCounts.Length; i++)
         {
@@ -38,7 +37,6 @@ public class MapManager : MonoBehaviour
             return;
         }
 
-        // Shuffle the list to randomize tile placement
         for (int i = 0; i < tilesToPlace.Count; i++)
         {
             GameObject temp = tilesToPlace[i];
@@ -51,11 +49,11 @@ public class MapManager : MonoBehaviour
         for (int y = 0; y < height; y++)
         {
             int rowWidth = (y % 2 == 0) ? width : width - 1;
-
             for (int x = 0; x < rowWidth; x++)
             {
                 Vector2 hexPosition = CalculateHexPosition(x, y);
-                Instantiate(tilesToPlace[tileIndex], hexPosition, Quaternion.identity, this.transform);
+                GameObject hex = Instantiate(tilesToPlace[tileIndex], hexPosition, Quaternion.identity, this.transform);
+                hex.GetComponent<Hex>().coordinates = new Vector2Int(x, y);
                 tileIndex++;
             }
         }
@@ -70,7 +68,17 @@ public class MapManager : MonoBehaviour
         float offsetX = (y % 2 == 0) ? 0 : hexWidth / 2;
         float posX = x * horizontalSpacing + offsetX;
         float posY = y * verticalSpacing;
-
         return new Vector2(posX, posY);
+    }
+
+    public MapSection GetMapSection(Vector2 position)
+    {
+        float sectionWidth = width * CalculateHexPosition(1, 0).x / 3; // Calculate section width based on hex width
+        if (position.x < sectionWidth)
+            return MapSection.LeftFlank;
+        else if (position.x < sectionWidth * 2)
+            return MapSection.Center;
+        else
+            return MapSection.RightFlank;
     }
 }
