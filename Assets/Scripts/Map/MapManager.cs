@@ -1,5 +1,8 @@
-using System.Collections.Generic;
+using System;
 using UnityEngine;
+using System.Collections.Generic;
+
+using Random = UnityEngine.Random;
 
 public class MapManager : MonoBehaviour
 {
@@ -20,10 +23,23 @@ public class MapManager : MonoBehaviour
 
     void GenerateMap()
     {
+
+        if (hexPrefabs == null || tileCounts == null || hexPrefabs.Length != tileCounts.Length)
+        {
+            Debug.LogError("Hex prefabs or tile counts are not properly configured.");
+            return;
+        }
+
         List<GameObject> tilesToPlace = new List<GameObject>();
         int totalTiles = 0;
         for (int i = 0; i < tileCounts.Length; i++)
         {
+            if (hexPrefabs[i] == null)
+            {
+                Debug.LogError("Hex prefab at index " + i + " is null.");
+                continue;
+            }
+
             totalTiles += tileCounts[i];
             for (int j = 0; j < tileCounts[i]; j++)
             {
@@ -53,7 +69,18 @@ public class MapManager : MonoBehaviour
             {
                 Vector2 hexPosition = CalculateHexPosition(x, y);
                 GameObject hex = Instantiate(tilesToPlace[tileIndex], hexPosition, Quaternion.identity, this.transform);
-                hex.GetComponent<Hex>().coordinates = new Vector2Int(x, y);
+                if (hex == null)
+                {
+                    Debug.LogError("Failed to instantiate hex at index: " + tileIndex);
+                    continue;
+                }
+                Hex hexComponent = hex.GetComponent<Hex>();
+                if (hexComponent == null)
+                {
+                    Debug.LogError("Hex component not found on instantiated hex prefab at index: " + tileIndex);
+                    continue;
+                }
+                hexComponent.coordinates = new Vector2Int(x, y);
                 tileIndex++;
             }
         }
@@ -73,7 +100,7 @@ public class MapManager : MonoBehaviour
 
     public MapSection GetMapSection(Vector2 position)
     {
-        float sectionWidth = width * CalculateHexPosition(1, 0).x / 3; // Calculate section width based on hex width
+        float sectionWidth = width * CalculateHexPosition(1, 0).x / 3;
         if (position.x < sectionWidth)
             return MapSection.LeftFlank;
         else if (position.x < sectionWidth * 2)
