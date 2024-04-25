@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class UnitManager : MonoBehaviour
 {
-    public static UnitManager Instance { get; private set; }
+/*    public static UnitManager Instance { get; private set; }
 
     private void Awake()
     {
@@ -60,4 +60,5 @@ public class UnitManager : MonoBehaviour
             Debug.Log("This unit cannot perform actions!");
         }
     }
+*/
 }
