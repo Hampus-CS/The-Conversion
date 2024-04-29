@@ -9,9 +9,17 @@ using Debug = UnityEngine.Debug;
 
 public class Card : MonoBehaviour
 {
+
+    private GameManager gm;
+
+    [Header("Game Manager Variables")]
     public bool hasBeenPlayed;
     public int handIndex;
-    private GameManager gm;
+
+
+    [Header("Card Properties")]
+    public Flank cardFlank;
+    public int troopsAmount;
 
     void Start()
     {
@@ -31,6 +39,7 @@ public class Card : MonoBehaviour
             gm.availableCardSlots[handIndex] = true;
             gm.cardPlayedThisTurn = true;
             MoveToDiscardPile();
+            Debug.Log("Card played with flank: " + cardFlank.ToString() + " and troops: " + troopsAmount);
         }
     }
 

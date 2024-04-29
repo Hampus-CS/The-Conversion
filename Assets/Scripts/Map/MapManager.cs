@@ -7,12 +7,12 @@ using Random = UnityEngine.Random;
 public class MapManager : MonoBehaviour
 {
     [Header("Map Size")]
-    public int width = 13; // Maximum width of the map
-    public int height = 9; // Height of the map
+    public int width = 13;
+    public int height = 9;
 
     [Header("Hexes")]
-    public GameObject[] hexPrefabs; // Assign different Hex prefabs in the Inspector
-    public int[] tileCounts; // Number of each tile type to use
+    public GameObject[] hexPrefabs;
+    public int[] tileCounts;
 
     public enum MapSection { LeftFlank, Center, RightFlank }
 
@@ -84,6 +84,7 @@ public class MapManager : MonoBehaviour
                 tileIndex++;
             }
         }
+
     }
 
     Vector2 CalculateHexPosition(int x, int y)
@@ -108,4 +109,5 @@ public class MapManager : MonoBehaviour
         else
             return MapSection.RightFlank;
     }
+
 }
