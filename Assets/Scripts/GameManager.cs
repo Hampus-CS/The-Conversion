@@ -6,9 +6,6 @@ using UnityEngine;
 using Random = UnityEngine.Random;
 using Debug = UnityEngine.Debug;
 
-using UnityEngine.UI;
-using TMPro;
-
 public class GameManager : MonoBehaviour
 {
     [Header("Card Lists")]
@@ -23,9 +20,14 @@ public class GameManager : MonoBehaviour
     [Header("Turn")]
     public bool cardPlayedThisTurn = false;
 
+    [Header("Return discarded cards to the deck")]
+    public int discardLimit;
+
+    /*
     [Header("Text")]
     public TMP_Text deckSizeText;
     public TMP_Text discradPileSizeText;
+    */
 
     void Start()
     {
@@ -34,11 +36,13 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        /*
         if (deckSizeText != null && discradPileSizeText != null)
         {
             deckSizeText.text = deck.Count.ToString();
             discradPileSizeText.text = discardPile.Count.ToString();
         }
+        */
     }
 
     void InitializeGame()
@@ -79,7 +83,7 @@ public class GameManager : MonoBehaviour
 
     public void Shuffle()
     {
-        if (discardPile.Count >= 2)
+        if (discardPile.Count >= discardLimit)
         {
             foreach (Card card in new List<Card>(discardPile))
             {
