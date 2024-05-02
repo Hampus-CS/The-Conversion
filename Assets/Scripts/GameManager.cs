@@ -23,6 +23,11 @@ public class GameManager : MonoBehaviour
     [Header("Return discarded cards to the deck")]
     public int discardLimit;
 
+    [Header("Troop settings")]
+    public GameObject troopPrefab; // Drag your troop prefab here in the inspector
+    public int numberOfTroops = 5; // Set the number of troops to spawn
+    public float spawnY = -3.5f; // Y position for placing troops at the bottom of the map
+
     /*
     [Header("Text")]
     public TMP_Text deckSizeText;
@@ -49,6 +54,7 @@ public class GameManager : MonoBehaviour
     {
         ShuffleDeck();
         DealInitialHand();
+        SpawnTroopsAtBottom();
     }
 
     void DealInitialHand()
@@ -129,4 +135,22 @@ public class GameManager : MonoBehaviour
             deck[randomIndex] = temp;
         }
     }
+
+    void SpawnTroopsAtBottom()
+    {
+        float startX = CalculateStartX(); // Calculate starting X position based on number of troops and map size
+        for (int i = 0; i < numberOfTroops; i++)
+        {
+            // Instantiate the troop at the calculated position
+            GameObject troop = Instantiate(troopPrefab, new Vector3(startX + i * 1.0f, spawnY, 0), Quaternion.identity);
+            // Adjust the X position and other properties as needed
+        }
+    }
+
+    float CalculateStartX()
+    {
+        // Example calculation for starting X position (this may need to be adjusted based on your game's map and layout)
+        return -numberOfTroops / 2.0f;
+    }
+
 }
