@@ -5,7 +5,6 @@ using Debug = UnityEngine.Debug;
 
 public class Card : MonoBehaviour
 {
-
     private GameManager gameManager;
 
     [Header("Game Manager Variables")]
@@ -15,6 +14,12 @@ public class Card : MonoBehaviour
     [Header("Card Properties")]
     public Flank cardFlank;
     public int troopsAmount;
+
+    public void PlayCard()
+    {
+        Debug.Log($"Card PlayCard called: Flank = {cardFlank}, Troops = {troopsAmount}");
+        GameManager.Instance.PlayCard(this);
+    }
 
     void Start()
     {
@@ -34,10 +39,8 @@ public class Card : MonoBehaviour
             gameManager.availableCardSlots[handIndex] = true;
             gameManager.cardPlayedThisTurn = true;
             MoveToDiscardPile();
-            Debug.Log("Card played with flank: " + cardFlank.ToString() + " and troops: " + troopsAmount);
-
-            // Move troop amount
-
+            PlayCard();
+            Debug.Log($"Card played with flank: {cardFlank} and troops: {troopsAmount}");
         }
     }
 

@@ -203,10 +203,10 @@ MonoBehaviour:
   - {fileID: 941104061045055756}
   availableCardSlots: 0101010101
   cardPlayedThisTurn: 0
+  canMoveTroops: 0
+  allowedFlank: 0
+  allowedMoves: 0
   discardLimit: 5
-  troopPrefab: {fileID: 0}
-  numberOfTroops: 5
-  spawnY: -3.5
 --- !u!4 &99804190 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 820010248504790262, guid: e85df0047e02a284e8c33b62cc15de0b, type: 3}
@@ -312,6 +312,7 @@ GameObject:
   - component: {fileID: 366449951}
   - component: {fileID: 366449952}
   - component: {fileID: 366449953}
+  - component: {fileID: 366449954}
   m_Layer: 0
   m_Name: Grass-Hexagon-Pointed-Top
   m_TagString: Untagged
@@ -401,6 +402,42 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   isOccupied: 0
   troop: {fileID: 0}
+  hexSide: 0
+--- !u!58 &366449954
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366449950}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.28
 --- !u!1 &479039408
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +518,7 @@ GameObject:
   - component: {fileID: 778805754}
   - component: {fileID: 778805753}
   - component: {fileID: 778805752}
+  - component: {fileID: 778805755}
   m_Layer: 0
   m_Name: Village-Hexagon-Pointed-Top
   m_TagString: Untagged
@@ -503,6 +541,7 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   isOccupied: 0
   troop: {fileID: 0}
+  hexSide: 0
 --- !u!212 &778805753
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -570,6 +609,46 @@ Transform:
   m_Children: []
   m_Father: {fileID: 911771168}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &778805755
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 778805751}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.28
+--- !u!1 &828146077 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8716999328818909348, guid: de4e7401ef23d3c45999d836b8842d88, type: 3}
+  m_PrefabInstance: {fileID: 8942809609116877304}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &908456643
 GameObject:
   m_ObjectHideFlags: 0
@@ -581,6 +660,7 @@ GameObject:
   - component: {fileID: 908456644}
   - component: {fileID: 908456645}
   - component: {fileID: 908456646}
+  - component: {fileID: 908456647}
   m_Layer: 0
   m_Name: Small-Forest-Hexagon-Pointed-Top
   m_TagString: Untagged
@@ -670,6 +750,42 @@ MonoBehaviour:
   coordinates: {x: 0, y: 0}
   isOccupied: 0
   troop: {fileID: 0}
+  hexSide: 0
+--- !u!58 &908456647
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 908456643}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 1.28
 --- !u!1 &911771167
 GameObject:
   m_ObjectHideFlags: 0
@@ -753,6 +869,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b7c98a8957a7fa44ba4b5be0efde9ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1094894199 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7580981400580046291, guid: d74e244bdecc15e41818b7209ff581b4, type: 3}
+  m_PrefabInstance: {fileID: 5564406839463721362}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1120843095 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2241056392172277083, guid: ca181efcc6ac1764aa8ce9398242512f, type: 3}
@@ -1165,7 +1286,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1653838956}
-  - component: {fileID: 1653838957}
   m_Layer: 0
   m_Name: UnitManager
   m_TagString: Untagged
@@ -1188,18 +1308,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 82051267}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1653838957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1653838954}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 20e9e107155e2184bb4742e05aecb4c2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1756593191
 GameObject:
   m_ObjectHideFlags: 0
@@ -1287,6 +1395,8 @@ MonoBehaviour:
   - {fileID: 908456643}
   - {fileID: 778805751}
   tileCounts: 610000001100000003000000
+  axisTroopPrefab: {fileID: 828146077}
+  alliedTroopPrefab: {fileID: 1094894199}
 --- !u!4 &1768908143
 Transform:
   m_ObjectHideFlags: 0
@@ -2014,6 +2124,10 @@ PrefabInstance:
     - target: {fileID: 4842485488112007283, guid: 6376dbefc5bb13c4b879163744bf14d2, type: 3}
       propertyPath: m_Name
       value: Card1-Left-1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416509842914052636, guid: 6376dbefc5bb13c4b879163744bf14d2, type: 3}
+      propertyPath: cardProperties
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

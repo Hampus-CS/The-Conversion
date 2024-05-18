@@ -145,5 +145,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   hasBeenPlayed: 0
   handIndex: 0
-  cardFlank: 2
+  cardFlank: 1
   troopsAmount: 1
